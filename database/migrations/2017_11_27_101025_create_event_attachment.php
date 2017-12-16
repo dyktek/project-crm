@@ -18,6 +18,7 @@ class CreateEventAttachment extends Migration
 		    $table->integer('event_id')->unsigned();
 		    $table->integer('attachment_id')->unsigned();
 		    $table->timestamps();
+		    $table->softDeletes();
 
 		    $table->foreign('event_id')
 		          ->references('id')

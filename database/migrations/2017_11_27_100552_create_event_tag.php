@@ -18,6 +18,7 @@ class CreateEventTag extends Migration
 		    $table->integer('event_id')->unsigned();
 		    $table->integer('tag_id')->unsigned();
 		    $table->timestamps();
+		    $table->softDeletes();
 
 		    $table->foreign('event_id')
 		          ->references('id')

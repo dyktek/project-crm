@@ -18,6 +18,7 @@ class CreateUserEvent extends Migration
 		    $table->integer('user_id')->unsigned();
 		    $table->integer('event_id')->unsigned();
 		    $table->timestamps();
+		    $table->softDeletes();
 
 		    $table->foreign('user_id')
 		          ->references('id')
