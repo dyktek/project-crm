@@ -10,7 +10,7 @@ use Prettus\Repository\Traits\TransformableTrait;
 
 class User extends Authenticatable implements Transformable
 {
-    use Notifiable;
+	use Notifiable;
 	use SoftDeletes;
 	use TransformableTrait;
 
@@ -21,25 +21,25 @@ class User extends Authenticatable implements Transformable
 	 */
 	protected $dates = ['deleted_at'];
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+	/**
+	 * The attributes that are mass assignable.
+	 *
+	 * @var array
+	 */
+	protected $fillable = [
+		'name', 'email', 'password',
+	];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+	/**
+	 * The attributes that should be hidden for arrays.
+	 *
+	 * @var array
+	 */
+	protected $hidden = [
+		'password', 'remember_token',
+	];
 
-    public function event() {
-    	return $this->belongsToMany(Event::class, 'user_event');
-    }
+	public function event() {
+		return $this->belongsToMany(Event::class);
+	}
 }
