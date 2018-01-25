@@ -1,7 +1,17 @@
 <?php
 
-Route::resources([
-	'events' => 'EventsController'
-]);
+Route::group([
+	'middleware' => 'auth.api'
+], function () {
 
-Route::get('events/my-events/{user}', 'EventsController@myEvents');
+	Route::resources( [
+		'events' => 'EventsController'
+	] );
+
+	Route::get( 'events/my-events/{user}', 'EventsController@myEvents' );
+	Route::post('logout', 'AuthController@logout');
+	Route::post('refresh', 'AuthController@refresh');
+
+});
+
+Route::post('login', 'AuthController@login');

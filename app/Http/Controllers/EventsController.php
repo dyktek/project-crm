@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\Event;
+use App\Repositories\EventRepositoryEloquent;
 use Illuminate\Http\Request;
 use App\Repositories\EventRepository;
 use App\Repositories\UserRepository;
 
 class EventsController extends Controller
 {
+	/**
+	 * @var EventRepositoryEloquent
+	 */
 	protected $eventRepository;
 
 	public function __construct(EventRepository $eventRepository)
@@ -39,7 +44,6 @@ class EventsController extends Controller
 		if($this->eventRepository->check($startDate, $endDate)) {
 			return response()->json(['status' => 'cant create event on date: ' . $startDate . ' ' . $endDate], 400);
 		} else {
-
 			$event = $this
 						->eventRepository
 						->createEvent($request->all(), $request->get('user_id'));
