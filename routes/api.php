@@ -1,11 +1,12 @@
 <?php
 
 Route::group([
-	'middleware' => 'auth.api'
+	//'middleware' => 'auth.api'
 ], function () {
 
 	Route::resources( [
-		'events' => 'EventsController'
+		'events' => 'EventsController',
+		'roles' => 'RolesController'
 	] );
 
 	Route::get( 'events/my-events/{user}', 'EventsController@myEvents' );
