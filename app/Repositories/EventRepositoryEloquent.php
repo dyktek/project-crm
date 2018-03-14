@@ -34,10 +34,10 @@ class EventRepositoryEloquent extends BaseRepository implements EventRepository
 
 	public function createEvent($params, $userId)
 	{
-
-		$event = $this->create($params)
-							->user()
-							->attach($userId);
+		$event = $this
+			->create($params)
+			->user()
+			->attach($userId);
 
 		return $event;
 	}

@@ -19,7 +19,7 @@ class AttachmentValidator extends LaravelValidator
      */
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-	        'source' => 'image'
+	        'source' => 'required|image'
         ],
         ValidatorInterface::RULE_UPDATE => [
 	        //'source' => 'required|image'

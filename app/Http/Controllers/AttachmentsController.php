@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use App\Http\Requests\AttachmentCreateRequest;
@@ -69,8 +70,6 @@ class AttachmentsController extends Controller
      */
     public function store(AttachmentCreateRequest $request)
     {
-
-//    	dd($request->all());
         try {
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
 
@@ -80,9 +79,11 @@ class AttachmentsController extends Controller
             ]);
 
             $eventId = $request->get('event', false);
-            if($eventId) {
-            	$attachment->events()->attach($eventId);
-            }
+	        if($eventId) {
+		        $this
+			        ->repository
+			        ->sync($attachment->id, 'events', $eventId);
+	        }
 
             $response = [
                 'message' => 'Attachment created.',
@@ -153,7 +154,9 @@ class AttachmentsController extends Controller
 
 	        $eventId = $request->get('event', false);
 	        if($eventId) {
-		        $attachment->events()->sync($eventId);
+		        $this
+			        ->repository
+			        ->sync($attachment->id, 'events', $eventId);
 	        }
 
             $response = [

@@ -32,7 +32,6 @@ class AttachmentRepositoryEloquent extends BaseRepository implements AttachmentR
     */
     public function validator()
     {
-
         return AttachmentValidator::class;
     }
 

@@ -24,7 +24,6 @@ class AttachmentCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
         ];
     }
 }
